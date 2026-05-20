@@ -121,7 +121,7 @@ export function SectionLabel({ children }: { children: React.ReactNode }) {
       style={{
         fontSize: 11,
         fontWeight: 600,
-        color: "var(--text-tertiary)",
+        color: "var(--avax-red)",
         letterSpacing: 1.5,
         marginBottom: 16,
       }}
