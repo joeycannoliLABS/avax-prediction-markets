@@ -51,7 +51,7 @@ export default function Home() {
         <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 8, flexWrap: "wrap" }}>
        
           <h1 style={{ fontSize: 32, fontWeight: 600, margin: 0, color: "var(--text-primary)" }}>
-            Prediction Markets
+            Avalanche Prediction Markets
           </h1>
           <span
             style={{
