@@ -48,10 +48,8 @@ export default function Home() {
     <>
       {/* Header with Avalanche logo */}
       <div style={{ marginBottom: 36 }}>
-        <div style={{ marginBottom: 16 }}>
-          <img src="/avalanche-horizontal.svg" alt="Avalanche" height={32} style={{ display: "block" }} />
-        </div>
-        <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 8 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 8, flexWrap: "wrap" }}>
+          <img src="/avalanche-horizontal.svg" alt="Avalanche" height={28} style={{ display: "block" }} />
           <h1 style={{ fontSize: 32, fontWeight: 600, margin: 0, color: "var(--text-primary)" }}>
             Prediction Markets
           </h1>
