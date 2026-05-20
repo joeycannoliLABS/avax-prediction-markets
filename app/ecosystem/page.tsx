@@ -2,7 +2,22 @@
 
 import { useState, useEffect } from "react";
 
-const products = [
+interface Product {
+  name: string;
+  status: string;
+  statusColor: string;
+  logo: string | null;
+  fallbackIcon: string;
+  fallbackBg: string;
+  fallbackColor: string;
+  category: string;
+  chain: string;
+  description: string;
+  detail: string;
+  href: string | null;
+}
+
+const products: Product[] = [
   {
     name: "100s (Hundreds)",
     status: "Building",
@@ -14,7 +29,7 @@ const products = [
     category: "Native CLOB",
     chain: "Avalanche",
     description: "First unified exchange and clearinghouse for real-time event risk. CLOB-style matching, instant stablecoin settlement.",
-    detail: "1% fees on volume plus 1% on winnings. Event Intelligence (EI) data feed and PIX Probability Index. B2B distribution through Cube Exchange's Telegram mini-app. Founded by Rob Levy (ex-CBOE DPMM). GTM end Q2 / early Q3 2026.",
+    detail: "1% fees on volume plus 1% on winnings. Event Intelligence (EI) data feed and PIX Probability Index. B2B distribution through Cube Exchange Telegram mini-app. Founded by Rob Levy (ex-CBOE DPMM). GTM end Q2 / early Q3 2026.",
     href: null,
   },
   {
@@ -28,7 +43,7 @@ const products = [
     category: "Wrapper / Perps",
     chain: "Avalanche",
     description: "World's first perpetual prediction markets. Always-on markets with leverage, funding, and professional risk controls.",
-    detail: "Inherits Polymarket's liquidity, delivers perp-style trading. Gasless, omnichain, sub-millisecond fills, no KYC. GTM end Q2 / early Q3 2026.",
+    detail: "Inherits Polymarket liquidity, delivers perp-style trading. Gasless, omnichain, sub-millisecond fills, no KYC. GTM end Q2 / early Q3 2026.",
     href: null,
   },
   {
@@ -74,7 +89,7 @@ const products = [
     href: "https://www.predictfully.com/",
   },
   {
-    name: "Core × Polymarket",
+    name: "Core x Polymarket",
     status: "Building",
     statusColor: "#FB8C00",
     logo: "/logo-core-polymarket.jpg",
@@ -95,7 +110,7 @@ const products = [
     fallbackIcon: "△",
     fallbackBg: "#331a27",
     fallbackColor: "#EC407A",
-    category: "SocialFi / Distribution", 
+    category: "SocialFi / Distribution",
     chain: "Avalanche C-Chain",
     description: "SocialFi distribution surface. 200K+ users, $100M+ in cumulative volume.",
     detail: "ARENA token. The most credible existing social distribution surface on Avalanche for consumer-facing prediction products.",
@@ -104,12 +119,12 @@ const products = [
 ];
 
 export default function ConstellationMap() {
-  const [selected, setSelected] = useState<any>(null);
+  const [selected, setSelected] = useState<Product | null>(null);
   const [rotation, setRotation] = useState(0);
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setRotation(prev => (prev + 0.15) % 360);
+      setRotation((prev: number) => (prev + 0.15) % 360);
     }, 50);
     return () => clearInterval(timer);
   }, []);
@@ -129,7 +144,6 @@ export default function ConstellationMap() {
 
   return (
     <div style={{ minHeight: "100vh", background: "#0D1117", color: "#E6EDF3", fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" }}>
-      {/* Modal */}
       {selected && (
         <div
           onClick={() => setSelected(null)}
@@ -139,7 +153,7 @@ export default function ConstellationMap() {
             display: "flex", alignItems: "center", justifyContent: "center", padding: 24,
           }}
         >
-          <div onClick={e => e.stopPropagation()} style={{
+          <div onClick={(e: React.MouseEvent) => e.stopPropagation()} style={{
             background: "#161B22", border: "1px solid rgba(255,255,255,0.1)",
             borderRadius: 16, padding: "32px 36px", maxWidth: 520, width: "100%",
           }}>
@@ -169,7 +183,7 @@ export default function ConstellationMap() {
             <p style={{ fontSize: 15, lineHeight: 1.7, color: "rgba(255,255,255,0.7)", marginBottom: 16 }}>{selected.description}</p>
             <p style={{ fontSize: 14, lineHeight: 1.7, color: "rgba(255,255,255,0.5)", marginBottom: 20 }}>{selected.detail}</p>
             <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: 20 }}>
-              {[selected.category, selected.chain].map(tag => (
+              {[selected.category, selected.chain].map((tag: string) => (
                 <span key={tag} style={{ fontSize: 11, padding: "4px 12px", borderRadius: 6, background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.5)" }}>{tag}</span>
               ))}
             </div>
@@ -188,10 +202,10 @@ export default function ConstellationMap() {
         <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 8 }}>
           <h1 style={{ fontSize: 32, fontWeight: 600, margin: 0 }}>Ecosystem Map</h1>
           <span style={{ background: "#00E676", color: "#000", fontSize: 11, fontWeight: 600, padding: "3px 12px", borderRadius: 4 }}>
-            {products.filter(p => p.status.includes("Live")).length} LIVE
+            {products.filter((p: Product) => p.status.includes("Live")).length} LIVE
           </span>
           <span style={{ background: "#FB8C00", color: "#000", fontSize: 11, fontWeight: 600, padding: "3px 12px", borderRadius: 4 }}>
-            {products.filter(p => p.status.includes("Building")).length} BUILDING
+            {products.filter((p: Product) => p.status.includes("Building")).length} BUILDING
           </span>
         </div>
         <p style={{ fontSize: 15, color: "rgba(255,255,255,0.45)", margin: "0 0 24px", maxWidth: 500 }}>
@@ -213,23 +227,20 @@ export default function ConstellationMap() {
                 <feMergeNode in="SourceGraphic" />
               </feMerge>
             </filter>
-            {products.map((p, i) => p.logo && (
+            {products.map((p: Product, i: number) => p.logo && (
               <clipPath key={i} id={`clip-${i}`}>
                 <circle cx={nodeSize / 2} cy={nodeSize / 2} r={nodeSize / 2 - 2} />
               </clipPath>
             ))}
           </defs>
 
-          {/* Orbit ring */}
           <circle cx={cx} cy={cy} r={radius} fill="none" stroke="rgba(229,57,53,0.08)" strokeWidth="1" strokeDasharray="4,6" />
           <circle cx={cx} cy={cy} r={radius - 40} fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
           <circle cx={cx} cy={cy} r={radius + 40} fill="none" stroke="rgba(255,255,255,0.03)" strokeWidth="1" />
 
-          {/* Center glow */}
           <circle cx={cx} cy={cy} r={120} fill="url(#centerGlow)" />
 
-          {/* Connection lines */}
-          {products.map((p, i) => {
+          {products.map((p: Product, i: number) => {
             const pos = getPosition(i, products.length);
             return (
               <line
@@ -243,14 +254,12 @@ export default function ConstellationMap() {
             );
           })}
 
-          {/* Center Avalanche logo */}
           <g>
             <circle cx={cx} cy={cy} r={42} fill="#161B22" stroke="#E53935" strokeWidth="2" />
             <image href="/avalanche-triangle.svg" x={cx - 24} y={cy - 24} width="48" height="48" />
           </g>
 
-          {/* Product nodes */}
-          {products.map((p, i) => {
+          {products.map((p: Product, i: number) => {
             const pos = getPosition(i, products.length);
             return (
               <g
@@ -258,7 +267,6 @@ export default function ConstellationMap() {
                 style={{ cursor: "pointer" }}
                 onClick={() => setSelected(p)}
               >
-                {/* Node border glow */}
                 <circle
                   cx={pos.x + nodeSize / 2}
                   cy={pos.y + nodeSize / 2}
@@ -296,7 +304,6 @@ export default function ConstellationMap() {
                     {p.fallbackIcon}
                   </text>
                 )}
-                {/* Label */}
                 <text
                   x={pos.x + nodeSize / 2}
                   y={pos.y + nodeSize + 16}
