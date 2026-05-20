@@ -104,7 +104,7 @@ const products = [
 ];
 
 export default function ConstellationMap() {
-  const [selected, setSelected] = useState(null);
+  const [selected, setSelected] = useState<any>(null);
   const [rotation, setRotation] = useState(0);
 
   useEffect(() => {
