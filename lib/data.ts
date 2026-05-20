@@ -22,7 +22,7 @@ export const ecosystemProducts = [
     icon: "∞",
     iconBg: "#2d1a3e",
     iconColor: "#AB47BC",
-    logoUrl: null,
+    logoUrl: "/logo-verdict.jpg",
     href: null,
   },
   {
@@ -35,7 +35,7 @@ export const ecosystemProducts = [
     icon: "▶",
     iconBg: "#1a3329",
     iconColor: "#00E676",
-    logoUrl: "https://m3lee.com/favicon.ico",
+    logoUrl: "/logo-m3lee.jpg",
     href: "https://m3lee.com/explore",
   },
   {
@@ -48,7 +48,7 @@ export const ecosystemProducts = [
     icon: "●",
     iconBg: "#2d331a",
     iconColor: "#C6FF00",
-    logoUrl: "https://protennis.fun/favicon.ico",
+    logoUrl: "/logo-tennis.jpg",
     href: "https://protennis.fun/",
   },
   {
@@ -61,7 +61,7 @@ export const ecosystemProducts = [
     icon: "◇",
     iconBg: "#1a2d33",
     iconColor: "#26C6DA",
-    logoUrl: "https://www.predictfully.com/favicon.ico",
+    logoUrl: "/logo-predictfully.jpg",
     href: "https://www.predictfully.com/",
   },
   {
@@ -74,7 +74,7 @@ export const ecosystemProducts = [
     icon: "⟁",
     iconBg: "#33201a",
     iconColor: "#FF7043",
-    logoUrl: null,
+    logoUrl: "/logo-core-polymarket.jpg",
     href: null,
   },
   {
@@ -87,7 +87,7 @@ export const ecosystemProducts = [
     icon: "△",
     iconBg: "#331a27",
     iconColor: "#EC407A",
-    logoUrl: "https://thearena.app/favicon.ico",
+    logoUrl: "/logo-arena.jpg",
     href: "https://thearena.app/",
   },
 ];
