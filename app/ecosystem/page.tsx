@@ -95,7 +95,7 @@ const products = [
     fallbackIcon: "△",
     fallbackBg: "#331a27",
     fallbackColor: "#EC407A",
-    category: "SocialFi / Distribution",
+    category: "SocialFi / Distribution", 
     chain: "Avalanche C-Chain",
     description: "SocialFi distribution surface. 200K+ users, $100M+ in cumulative volume.",
     detail: "ARENA token. The most credible existing social distribution surface on Avalanche for consumer-facing prediction products.",
