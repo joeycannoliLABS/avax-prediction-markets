@@ -4,7 +4,27 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-const sections = [
+interface NavChild {
+  name: string;
+  href: string;
+  external: boolean;
+}
+
+interface NavItem {
+  name: string;
+  icon: string;
+  href: string | null;
+  external?: boolean;
+  expandable?: boolean;
+  children?: NavChild[];
+}
+
+interface NavSection {
+  label: string;
+  items: NavItem[];
+}
+
+const sections: NavSection[] = [
   {
     label: "OVERVIEW",
     items: [
@@ -16,9 +36,19 @@ const sections = [
   {
     label: "STRATEGY",
     items: [
-      { name: "Strategy Documents", icon: "■", href: null, expandable: true, children: [
-        { name: "Vol. 01 — Q2 2026", href: "https://drive.google.com/file/d/1q73dJt8eWTU1YmBl4gD35Sd18DN1kDY6/view?usp=drive_link", external: true },
-      ]},
+      {
+        name: "Strategy Documents",
+        icon: "■",
+        href: null,
+        expandable: true,
+        children: [
+          {
+            name: "Vol. 01 — Q2 2026",
+            href: "https://drive.google.com/file/d/1q73dJt8eWTU1YmBl4gD35Sd18DN1kDY6/view?usp=drive_link",
+            external: true,
+          },
+        ],
+      },
       { name: "L1 vs C-Chain Pitch", icon: "⬡", href: "/l1-pitch" },
       { name: "Ownership Playbook", icon: "▣", href: "/ownership" },
     ],
@@ -26,7 +56,12 @@ const sections = [
   {
     label: "RESOURCES",
     items: [
-      { name: "PM Primer", icon: "▤", href: "/primer" },
+      {
+        name: "PM Primer",
+        icon: "▤",
+        href: "https://docs.google.com/document/d/1yBl_zjwRtuvfoWyHutlP6aMm_PYmYB2nnHYLnQEGUIQ/edit?usp=drive_link",
+        external: true,
+      },
     ],
   },
 ];
@@ -36,7 +71,7 @@ export default function Sidebar() {
   const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({});
 
   const toggleExpand = (name: string) => {
-    setExpandedItems(prev => ({ ...prev, [name]: !prev[name] }));
+    setExpandedItems((prev: Record<string, boolean>) => ({ ...prev, [name]: !prev[name] }));
   };
 
   return (
@@ -64,7 +99,7 @@ export default function Sidebar() {
         </div>
       </Link>
 
-      {sections.map((section) => (
+      {sections.map((section: NavSection) => (
         <div key={section.label} style={{ marginBottom: 8 }}>
           <div
             style={{
@@ -77,7 +112,7 @@ export default function Sidebar() {
           >
             {section.label}
           </div>
-          {section.items.map((item: any) => {
+          {section.items.map((item: NavItem) => {
             if (item.expandable) {
               const isExpanded = expandedItems[item.name] || false;
               return (
@@ -109,7 +144,7 @@ export default function Sidebar() {
                       ▾
                     </span>
                   </div>
-                  {isExpanded && item.children?.map((child: any) => (
+                  {isExpanded && item.children?.map((child: NavChild) => (
                     <a
                       key={child.name}
                       href={child.href}
@@ -135,11 +170,40 @@ export default function Sidebar() {
               );
             }
 
+            if (item.external && item.href) {
+              return (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{
+                    padding: "8px 20px",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 10,
+                    background: "transparent",
+                    borderLeft: "2px solid transparent",
+                    textDecoration: "none",
+                    transition: "all 0.15s ease",
+                  }}
+                >
+                  <span style={{ fontSize: 12, color: "var(--text-tertiary)", width: 16, textAlign: "center" }}>
+                    {item.icon}
+                  </span>
+                  <span style={{ fontSize: 13, color: "var(--text-secondary)", fontWeight: 400 }}>
+                    {item.name}
+                  </span>
+                  <span style={{ fontSize: 10, color: "var(--text-tertiary)" }}>↗</span>
+                </a>
+              );
+            }
+
             const active = pathname === item.href;
             return (
               <Link
                 key={item.name}
-                href={item.href}
+                href={item.href || "/"}
                 style={{
                   padding: "8px 20px",
                   display: "flex",
