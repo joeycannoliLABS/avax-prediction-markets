@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const sections = [
   {
@@ -15,7 +16,9 @@ const sections = [
   {
     label: "STRATEGY",
     items: [
-      { name: "Vol. 01 — Q2 2026", icon: "■", href: "/strategy" },
+      { name: "Strategy Documents", icon: "■", href: null, expandable: true, children: [
+        { name: "Vol. 01 — Q2 2026", href: "https://drive.google.com/file/d/1q73dJt8eWTU1YmBl4gD35Sd18DN1kDY6/view?usp=drive_link", external: true },
+      ]},
       { name: "L1 vs C-Chain Pitch", icon: "⬡", href: "/l1-pitch" },
       { name: "Ownership Playbook", icon: "▣", href: "/ownership" },
     ],
@@ -30,6 +33,11 @@ const sections = [
 
 export default function Sidebar() {
   const pathname = usePathname();
+  const [expandedItems, setExpandedItems] = useState<Record<string, boolean>>({});
+
+  const toggleExpand = (name: string) => {
+    setExpandedItems(prev => ({ ...prev, [name]: !prev[name] }));
+  };
 
   return (
     <aside
@@ -69,7 +77,64 @@ export default function Sidebar() {
           >
             {section.label}
           </div>
-          {section.items.map((item) => {
+          {section.items.map((item: any) => {
+            if (item.expandable) {
+              const isExpanded = expandedItems[item.name] || false;
+              return (
+                <div key={item.name}>
+                  <div
+                    onClick={() => toggleExpand(item.name)}
+                    style={{
+                      padding: "8px 20px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 10,
+                      cursor: "pointer",
+                      borderLeft: "2px solid transparent",
+                      transition: "all 0.15s ease",
+                    }}
+                  >
+                    <span style={{ fontSize: 12, color: "var(--text-tertiary)", width: 16, textAlign: "center" }}>
+                      {item.icon}
+                    </span>
+                    <span style={{ fontSize: 13, color: "var(--text-secondary)", fontWeight: 400, flex: 1 }}>
+                      {item.name}
+                    </span>
+                    <span style={{
+                      fontSize: 12,
+                      color: "var(--text-tertiary)",
+                      transition: "transform 0.2s",
+                      transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)",
+                    }}>
+                      ▾
+                    </span>
+                  </div>
+                  {isExpanded && item.children?.map((child: any) => (
+                    <a
+                      key={child.name}
+                      href={child.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      style={{
+                        padding: "6px 20px 6px 48px",
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 8,
+                        textDecoration: "none",
+                        borderLeft: "2px solid transparent",
+                        transition: "all 0.15s ease",
+                      }}
+                    >
+                      <span style={{ fontSize: 12, color: "var(--text-secondary)", fontWeight: 400 }}>
+                        {child.name}
+                      </span>
+                      <span style={{ fontSize: 10, color: "var(--text-tertiary)" }}>↗</span>
+                    </a>
+                  ))}
+                </div>
+              );
+            }
+
             const active = pathname === item.href;
             return (
               <Link
