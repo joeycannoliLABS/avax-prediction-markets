@@ -119,7 +119,7 @@ export default function ConstellationMap() {
   const radius = 260;
   const nodeSize = 50;
 
-  const getPosition = (index, total) => {
+  const getPosition = (index: number, total: number) => {
     const angle = ((index / total) * 360 + rotation) * (Math.PI / 180);
     return {
       x: cx + radius * Math.cos(angle) - nodeSize / 2,
