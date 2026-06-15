@@ -95,6 +95,7 @@ export const ecosystemProducts = [
 export const migrationTargets = [
   {
     name: "Limitless",
+    website: "https://limitless.exchange/",
     tier: "Tier 1",
     tierColor: "#E53935",
     status: "Active Pursuit",
@@ -113,6 +114,7 @@ export const migrationTargets = [
   },
   {
     name: "XO Market",
+    website: "https://xo.market/",
     tier: "Tier 1",
     tierColor: "#E53935",
     status: "New Target",
@@ -131,6 +133,7 @@ export const migrationTargets = [
   },
   {
     name: "Premu",
+    website: "https://premu.xyz/",
     tier: "Tier 1",
     tierColor: "#E53935",
     status: "New Target",
@@ -149,6 +152,7 @@ export const migrationTargets = [
   },
   {
     name: "Kash (kash.bot)",
+    website: "https://kash.bot/",
     tier: "Tier 2",
     tierColor: "#FB8C00",
     status: "Early Outreach",
@@ -167,6 +171,7 @@ export const migrationTargets = [
   },
   {
     name: "Overtime Markets",
+    website: "https://overtimemarkets.xyz/",
     tier: "Tier 2",
     tierColor: "#FB8C00",
     status: "New Target",
@@ -185,6 +190,7 @@ export const migrationTargets = [
   },
   {
     name: "Azuro Protocol",
+    website: "https://azuro.org/",
     tier: "Tier 2",
     tierColor: "#FB8C00",
     status: "Warm",
@@ -203,6 +209,7 @@ export const migrationTargets = [
   },
   {
     name: "PRDT Finance",
+    website: "https://prdt.finance/",
     tier: "Tier 2",
     tierColor: "#FB8C00",
     status: "Already on Avalanche",
@@ -221,6 +228,7 @@ export const migrationTargets = [
   },
   {
     name: "SX Bet",
+    website: "https://sx.bet/",
     tier: "Tier 2",
     tierColor: "#FB8C00",
     status: "Warm",
@@ -239,6 +247,7 @@ export const migrationTargets = [
   },
   {
     name: "Hyperliquid (HIP-4)",
+    website: "https://hyperliquid.xyz/",
     tier: "Tier 2",
     tierColor: "#FB8C00",
     status: "Monitor",
@@ -257,6 +266,7 @@ export const migrationTargets = [
   },
   {
     name: "Myriad Markets",
+    website: "https://myriad.markets/",
     tier: "Tier 2",
     tierColor: "#FB8C00",
     status: "Early",
@@ -275,6 +285,7 @@ export const migrationTargets = [
   },
   {
     name: "ADI Predictstreet",
+    website: "https://adipredictstreet.com/",
     tier: "Tier 2",
     tierColor: "#FB8C00",
     status: "Monitor",
@@ -293,6 +304,7 @@ export const migrationTargets = [
   },
   {
     name: "Drift BET",
+    website: "https://drift.trade/predict",
     tier: "Tier 3",
     tierColor: "#546E7A",
     status: "Opportunistic",
@@ -311,6 +323,7 @@ export const migrationTargets = [
   },
   {
     name: "Polkamarkets",
+    website: "https://polkamarkets.com/",
     tier: "Tier 3",
     tierColor: "#546E7A",
     status: "New Target",
@@ -329,6 +342,7 @@ export const migrationTargets = [
   },
   {
     name: "Zeitgeist",
+    website: "https://zeitgeist.pm/",
     tier: "Tier 3",
     tierColor: "#546E7A",
     status: "New Target",
@@ -347,6 +361,7 @@ export const migrationTargets = [
   },
   {
     name: "Oracl.fun",
+    website: "https://oracl.fun/",
     tier: "Tier 3",
     tierColor: "#546E7A",
     status: "New Target",
