@@ -73,6 +73,28 @@ export default function TargetsPage() {
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
               <span style={{ fontSize: 20, fontWeight: 600, color: "var(--text-primary)" }}>{p.name}</span>
+              {p.website && (
+                <a
+                  href={p.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e: React.MouseEvent) => e.stopPropagation()}
+                  style={{
+                    fontSize: 11,
+                    color: "var(--avax-red)",
+                    textDecoration: "none",
+                    padding: "2px 8px",
+                    borderRadius: 4,
+                    border: "1px solid rgba(229,57,53,0.3)",
+                    background: "rgba(229,57,53,0.08)",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 4,
+                  }}
+                >
+                  Visit ↗
+                </a>
+              )}
               <TierBadge tier={p.tier} color={p.tierColor} />
               {p.isNew && <NewBadge />}
               <span style={{ color: "var(--text-tertiary)", fontSize: 12, fontFamily: "monospace" }}>{p.status}</span>
