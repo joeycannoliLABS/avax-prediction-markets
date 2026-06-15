@@ -152,18 +152,31 @@ export default function TargetsPage() {
           other partner on the board.
           <br />
           <br />
-          <strong style={{ color: "var(--text-primary)" }}>The new high-upside play:</strong> XO Market. User-generated
-          prediction markets are potentially the next evolution of the category. They just raised, they&apos;re
-          chain-flexible, and their model benefits from ecosystem density Avalanche already has.
+          <strong style={{ color: "var(--text-primary)" }}>The new high-upside play:</strong> Premu. Just launched with permissionless
+          market creation + 2.5x leverage on Ethereum/Arbitrum/Base. Combines XO&apos;s user-generated model with Verdict&apos;s
+          leverage thesis. No ecosystem lock-in, World Cup timing, EVM-native. Move before they settle into Arbitrum.
+          <br />
+          <br />
+          <strong style={{ color: "var(--text-primary)" }}>The hidden asset:</strong> PRDT Finance is already deployed on
+          Avalanche but has no ecosystem relationship. $200M+ paid out since 2021, 80% revenue share to stakers. This
+          isn&apos;t a migration — it&apos;s a deepening. Co-funded liquidity and featured placement could make Avalanche
+          their primary chain.
           <br />
           <br />
           <strong style={{ color: "var(--text-primary)" }}>The ecosystem multiplier:</strong> Azuro. One win here means
-          multiple sports frontends, not one.
+          multiple sports frontends, not one. This is how you win a vertical without signing ten individual deals.
           <br />
           <br />
-          <strong style={{ color: "var(--text-primary)" }}>The timing catalyst:</strong> World Cup 2026 is the single
-          largest volume event for sports prediction markets this year. Pitch conversations need to land before the
-          volume does.
+          <strong style={{ color: "var(--text-primary)" }}>The TradFi invasion:</strong> 13 federally regulated platforms
+          are now live in the US — DraftKings, FanDuel, Fanatics, OG (Crypto.com), Gemini all launched prediction products.
+          The pitch to every on-chain target shifts: &quot;FanDuel and DraftKings are coming for your users with massive
+          distribution. Your edge is being on-chain, permissionless, and composable. Avalanche makes that edge as sharp
+          as possible.&quot;
+          <br />
+          <br />
+          <strong style={{ color: "var(--text-primary)" }}>The timing catalyst:</strong> World Cup 2026 is live NOW.
+          Every sports-facing target (Overtime, Azuro, SX Bet, Premu, ADI Predictstreet) has a volume spike happening.
+          Post-tournament is the window for expansion conversations.
         </div>
       </div>
     </>
