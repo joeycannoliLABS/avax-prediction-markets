@@ -1,206 +1,217 @@
 "use client";
 
-import { ecosystemProducts, categoryStats } from "@/lib/data";
-import { StatCard, SectionLabel, Card, StatusDot, Tag } from "@/components/UI";
-import Link from "next/link";
+import { useState } from "react";
+import { migrationTargets } from "@/lib/data";
+import { PageHeader, SectionLabel, FitBar, TierBadge, NewBadge, Card } from "@/components/UI";
 
-export default function Home() {
-  const targetHighlights = [
-    {
-      name: "Limitless",
-      tier: "Tier 1",
-      tierColor: "#E53935",
-      metric: "$1.6B+/mo",
-      metricLabel: "Monthly volume",
-      status: "Active Pursuit",
-      note: "#1 target. DCM filing, Nasdaq listing. Migration alongside IPO narrative.",
-    },
-    {
-      name: "XO Market",
-      tier: "Tier 1",
-      tierColor: "#E53935",
-      metric: "$150M+",
-      metricLabel: "Since Nov beta",
-      status: "New Target",
-      note: "YouTube of PMs. Permissionless, user-generated. $6M seed. Chain-flexible.",
-    },
-    {
-      name: "Overtime Markets",
-      tier: "Tier 2",
-      tierColor: "#FB8C00",
-      metric: "$27M+",
-      metricLabel: "Wagered",
-      status: "New Target",
-      note: "Decentralized sportsbook. LP-as-house. Fragmented across 6+ chains.",
-    },
-    {
-      name: "Azuro Protocol",
-      tier: "Tier 2",
-      tierColor: "#FB8C00",
-      metric: "Multi-dApp",
-      metricLabel: "Protocol layer",
-      status: "Warm",
-      note: "Sports betting infra. One win = multiple frontends. Force multiplier.",
-    },
-  ];
+export default function TargetsPage() {
+  const [expandedIdx, setExpandedIdx] = useState<number | null>(null);
+  const [filter, setFilter] = useState("All");
+  const [showNewOnly, setShowNewOnly] = useState(false);
+  const [sortBy, setSortBy] = useState<"fit" | "alpha">("fit");
+
+  const filtered = migrationTargets
+    .filter((p) => filter === "All" || p.tier === filter)
+    .filter((p) => !showNewOnly || p.isNew)
+    .sort((a, b) => (sortBy === "fit" ? b.avaxFit - a.avaxFit : a.name.localeCompare(b.name)));
+
+  const btnStyle = (active: boolean, color?: string) => ({
+    background: active ? (color ? `${color}22` : "rgba(255,255,255,0.1)") : "transparent",
+    border: `1px solid ${active ? (color || "rgba(255,255,255,0.2)") : "var(--border)"}`,
+    color: active ? (color || "var(--text-primary)") : "var(--text-secondary)",
+    padding: "6px 14px",
+    borderRadius: 6,
+    cursor: "pointer",
+    fontFamily: "monospace",
+    fontSize: 12,
+    letterSpacing: 0.5,
+  });
 
   return (
     <>
-      {/* Header with Avalanche logo */}
-      <div style={{ marginBottom: 36 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 14, marginBottom: 8, flexWrap: "wrap" }}>
-       
-          <h1 style={{ fontSize: 32, fontWeight: 600, margin: 0, color: "var(--text-primary)" }}>
-            Avalanche Prediction Markets
-          </h1>
-          <span
-            style={{
-              background: "var(--avax-red)",
-              color: "#fff",
-              fontSize: 11,
-              fontWeight: 600,
-              padding: "3px 12px",
-              borderRadius: 4,
-              letterSpacing: 0.5,
-            }}
-          >
-            INTERNAL
-          </span>
-        </div>
-        <p style={{ fontSize: 15, color: "var(--text-secondary)", margin: 0, lineHeight: 1.6, maxWidth: 640 }}>
-          Avalanche prediction market ecosystem — what&apos;s live, what&apos;s building, and what we&apos;re pursuing. Updated Q2 2026.
-        </p>
-      </div>
+      <PageHeader
+        title="Migration Targets"
+        badge="PM BD"
+        subtitle="Prediction Market BD lens: strategy, product positioning, competitive dynamics, distribution, partnership structure. Chain economics are supplementary."
+      />
 
-      {/* Stats - 3 columns */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 12, marginBottom: 36 }}>
-        {categoryStats.map((s) => (
-          <StatCard key={s.label} label={s.label} value={s.value} />
+      <div style={{ display: "flex", gap: 8, marginBottom: 12, flexWrap: "wrap", alignItems: "center" }}>
+        {["All", "Tier 1", "Tier 2", "Tier 3"].map((t) => (
+          <button key={t} onClick={() => setFilter(t)} style={btnStyle(filter === t)}>
+            {t}
+          </button>
         ))}
+        <div style={{ width: 1, height: 24, background: "var(--border)", margin: "0 4px" }} />
+        <button onClick={() => setShowNewOnly(!showNewOnly)} style={btnStyle(showNewOnly, "#00E676")}>
+          New targets only
+        </button>
+        <button onClick={() => setSortBy(sortBy === "fit" ? "alpha" : "fit")} style={btnStyle(false)}>
+          {sortBy === "fit" ? "Fit ↓" : "A→Z"}
+        </button>
       </div>
 
-      {/* Ecosystem products */}
-      <SectionLabel>ON AVALANCHE</SectionLabel>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 36 }}>
-        {ecosystemProducts.map((p) => {
-          const inner = (
-            <Card key={p.name} hover>
-              <div style={{ display: "flex", alignItems: "center", gap: 12, marginBottom: 14 }}>
-                {p.logoUrl ? (
-                  <img
-                    src={p.logoUrl}
-                    alt={p.name}
-                    width={36}
-                    height={36}
-                    style={{ borderRadius: 8, background: p.iconBg, objectFit: "contain" }}
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.style.display = "none";
-                      const fallback = target.nextElementSibling as HTMLElement;
-                      if (fallback) fallback.style.display = "flex";
-                    }}
-                  />
-                ) : null}
-                <div
-                  style={{
-                    width: 36,
-                    height: 36,
-                    borderRadius: 8,
-                    background: p.iconBg,
-                    display: p.logoUrl ? "none" : "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: 16,
-                    color: p.iconColor,
-                    flexShrink: 0,
-                  }}
-                >
-                  {p.icon}
-                </div>
-              </div>
-              <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 6 }}>
-                <span style={{ fontSize: 15, fontWeight: 600, color: "var(--text-primary)" }}>{p.name}</span>
-                <span style={{ display: "flex", alignItems: "center", fontSize: 11, color: p.statusColor }}>
-                  <StatusDot color={p.statusColor} />
-                  {p.status}
-                </span>
-                {p.href && (
-                  <span style={{ fontSize: 11, color: "var(--text-tertiary)" }}>↗</span>
-                )}
-              </div>
-              <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: "0 0 10px", lineHeight: 1.5 }}>
-                {p.description}
-              </p>
-              <div style={{ display: "flex", gap: 8 }}>
-                <Tag>{p.type}</Tag>
-                <Tag>{p.chain}</Tag>
-              </div>
-            </Card>
-          );
-
-          if (p.href) {
-            return (
-              <a key={p.name} href={p.href} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none", color: "inherit" }}>
-                {inner}
-              </a>
-            );
-          }
-          return <div key={p.name}>{inner}</div>;
-        })}
+      <div style={{ fontSize: 11, color: "var(--text-tertiary)", fontFamily: "monospace", marginBottom: 14 }}>
+        {filtered.length} platform{filtered.length !== 1 ? "s" : ""} ·{" "}
+        {migrationTargets.filter((p) => p.isNew).length} new · sorted by{" "}
+        {sortBy === "fit" ? "Avalanche fit" : "name"}
       </div>
 
-      {/* Target highlights */}
-      <SectionLabel>PRIORITY TARGETS</SectionLabel>
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 36 }}>
-        {targetHighlights.map((t) => (
-          <Card key={t.name} hover>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
-              <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                <span style={{ fontSize: 16, fontWeight: 600, color: "var(--text-primary)" }}>{t.name}</span>
-                <span
+      {filtered.map((p, i) => (
+        <div
+          key={p.name}
+          onClick={() => setExpandedIdx(expandedIdx === i ? null : i)}
+          style={{
+            background: expandedIdx === i ? "rgba(255,255,255,0.06)" : "var(--bg-card)",
+            border: `1px solid ${expandedIdx === i ? p.tierColor + "44" : "var(--border)"}`,
+            borderRadius: 10,
+            padding: "18px 22px",
+            cursor: "pointer",
+            transition: "all 0.2s ease",
+            marginBottom: 10,
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 10, flexWrap: "wrap" }}>
+              <span style={{ fontSize: 20, fontWeight: 600, color: "var(--text-primary)" }}>{p.name}</span>
+              {p.website && (
+                <a
+                  href={p.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e: React.MouseEvent) => e.stopPropagation()}
                   style={{
-                    fontSize: 10,
-                    fontWeight: 600,
+                    fontSize: 11,
+                    color: "var(--avax-red)",
+                    textDecoration: "none",
                     padding: "2px 8px",
                     borderRadius: 4,
-                    background: t.tierColor,
-                    color: "#fff",
-                    letterSpacing: 0.3,
+                    border: "1px solid rgba(229,57,53,0.3)",
+                    background: "rgba(229,57,53,0.08)",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    gap: 4,
                   }}
                 >
-                  {t.tier}
-                </span>
+                  Visit ↗
+                </a>
+              )}
+              <TierBadge tier={p.tier} color={p.tierColor} />
+              {p.isNew && <NewBadge />}
+              <span style={{ color: "var(--text-tertiary)", fontSize: 12, fontFamily: "monospace" }}>{p.status}</span>
+            </div>
+            <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+              <div style={{ textAlign: "right" as const }}>
+                <div style={{ fontSize: 10, color: "var(--text-tertiary)", fontFamily: "monospace", letterSpacing: 1, marginBottom: 2 }}>
+                  AVAX FIT
+                </div>
+                <FitBar value={p.avaxFit} />
               </div>
-              <span style={{ fontSize: 11, color: "var(--text-tertiary)" }}>{t.status}</span>
+              <span
+                style={{
+                  color: "var(--text-tertiary)",
+                  fontSize: 18,
+                  transition: "transform 0.2s",
+                  transform: expandedIdx === i ? "rotate(180deg)" : "rotate(0deg)",
+                }}
+              >
+                ▾
+              </span>
             </div>
-            <div style={{ display: "flex", alignItems: "baseline", gap: 6, marginBottom: 10 }}>
-              <span style={{ fontSize: 24, fontWeight: 700, color: "var(--text-primary)" }}>{t.metric}</span>
-              <span style={{ fontSize: 11, color: "var(--text-tertiary)" }}>{t.metricLabel}</span>
-            </div>
-            <p style={{ fontSize: 12, color: "var(--text-secondary)", margin: 0, lineHeight: 1.5 }}>{t.note}</p>
-          </Card>
-        ))}
-      </div>
+          </div>
 
-      {/* Getting started */}
-      <SectionLabel>GETTING STARTED</SectionLabel>
-      <Card>
-        <p style={{ fontSize: 14, color: "var(--text-secondary)", margin: 0, lineHeight: 1.75 }}>
-          Use the sidebar to navigate between the ecosystem overview, migration targets, and strategy docs. The{" "}
-          <Link href="/targets" style={{ color: "var(--text-primary)", fontWeight: 600 }}>
-            Migration Targets
-          </Link>{" "}
-          dashboard contains all active and prospective partners ranked by Avalanche fit. The{" "}
-          <Link href="/strategy" style={{ color: "var(--text-primary)", fontWeight: 600 }}>
-            Vol. 01
-          </Link>{" "}
-          strategy doc is the internal playbook for Q2 2026 — read it first. Check the{" "}
-          <Link href="/primer" style={{ color: "var(--text-primary)", fontWeight: 600 }}>
-            PM Primer
-          </Link>{" "}
-          for category mechanics, competitive landscape, and vocabulary.
-        </p>
-      </Card>
+          <div style={{ display: "flex", gap: 20, marginTop: 10, flexWrap: "wrap" }}>
+            {[
+              { label: "Chain", value: p.chain },
+              { label: "Type", value: p.type },
+              { label: "Volume", value: p.volume },
+              { label: "Raised", value: p.raised },
+            ].map((s) => (
+              <div key={s.label}>
+                <div style={{ fontSize: 9, color: "var(--text-tertiary)", fontFamily: "monospace", letterSpacing: 1, marginBottom: 2 }}>
+                  {s.label.toUpperCase()}
+                </div>
+                <div style={{ fontSize: 13, color: "var(--text-secondary)" }}>{s.value}</div>
+              </div>
+            ))}
+          </div>
+
+          {expandedIdx === i && (
+            <div style={{ marginTop: 18, paddingTop: 18, borderTop: "1px solid var(--border)" }}>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, marginBottom: 18 }}>
+                <DetailBlock title="WHAT'S BROKEN FOR THEM" content={p.pain} color="#E53935" icon="◆" />
+                <DetailBlock title="HOW TO PITCH" content={p.pitch} color="#00E676" icon="→" />
+              </div>
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 18, marginBottom: 18 }}>
+                <DetailBlock title="PM STRATEGY & COMPETITIVE NOTES" content={p.pmNotes} color="#FDD835" icon="◎" />
+                <DetailBlock title="CHAIN / INFRA (SUPPLEMENTARY)" content={p.chainNotes} color="rgba(255,255,255,0.35)" icon="⬡" />
+              </div>
+              <div style={{ background: "rgba(255,255,255,0.03)", borderRadius: 6, padding: "10px 14px" }}>
+                <span style={{ fontSize: 10, fontFamily: "monospace", color: "var(--text-tertiary)", letterSpacing: 1 }}>
+                  URGENCY{" "}
+                </span>
+                <span style={{ fontSize: 13, color: "var(--text-secondary)" }}>{p.urgency}</span>
+              </div>
+            </div>
+          )}
+        </div>
+      ))}
+
+      <div
+        style={{
+          marginTop: 32,
+          padding: "20px 22px",
+          background: "rgba(253,216,53,0.06)",
+          border: "1px solid rgba(253,216,53,0.15)",
+          borderRadius: 10,
+        }}
+      >
+        <div style={{ fontFamily: "monospace", fontSize: 10, letterSpacing: 1.5, color: "#FDD835", marginBottom: 8, fontWeight: 700 }}>
+          ◎ STRATEGIC READS
+        </div>
+        <div style={{ fontSize: 13, lineHeight: 1.7, color: "var(--text-secondary)" }}>
+          <strong style={{ color: "var(--text-primary)" }}>The category-defining swing:</strong> Limitless remains the
+          #1 target. Their IPO narrative, growth trajectory, and workload profile align with Avalanche better than any
+          other partner on the board.
+          <br />
+          <br />
+          <strong style={{ color: "var(--text-primary)" }}>The new high-upside play:</strong> Premu. Just launched with permissionless
+          market creation + 2.5x leverage on Ethereum/Arbitrum/Base. Combines XO&apos;s user-generated model with Verdict&apos;s
+          leverage thesis. No ecosystem lock-in, World Cup timing, EVM-native. Move before they settle into Arbitrum.
+          <br />
+          <br />
+          <strong style={{ color: "var(--text-primary)" }}>The hidden asset:</strong> PRDT Finance is already deployed on
+          Avalanche but has no ecosystem relationship. $200M+ paid out since 2021, 80% revenue share to stakers. This
+          isn&apos;t a migration — it&apos;s a deepening. Co-funded liquidity and featured placement could make Avalanche
+          their primary chain.
+          <br />
+          <br />
+          <strong style={{ color: "var(--text-primary)" }}>The ecosystem multiplier:</strong> Azuro. One win here means
+          multiple sports frontends, not one. This is how you win a vertical without signing ten individual deals.
+          <br />
+          <br />
+          <strong style={{ color: "var(--text-primary)" }}>The TradFi invasion:</strong> 13 federally regulated platforms
+          are now live in the US — DraftKings, FanDuel, Fanatics, OG (Crypto.com), Gemini all launched prediction products.
+          The pitch to every on-chain target shifts: &quot;FanDuel and DraftKings are coming for your users with massive
+          distribution. Your edge is being on-chain, permissionless, and composable. Avalanche makes that edge as sharp
+          as possible.&quot;
+          <br />
+          <br />
+          <strong style={{ color: "var(--text-primary)" }}>The timing catalyst:</strong> World Cup 2026 is live NOW.
+          Every sports-facing target (Overtime, Azuro, SX Bet, Premu, ADI Predictstreet) has a volume spike happening.
+          Post-tournament is the window for expansion conversations.
+        </div>
+      </div>
     </>
+  );
+}
+
+function DetailBlock({ title, content, color, icon }: { title: string; content: string; color: string; icon: string }) {
+  return (
+    <div>
+      <div style={{ fontSize: 10, fontFamily: "monospace", letterSpacing: 1.5, color, marginBottom: 6, fontWeight: 700 }}>
+        {icon} {title}
+      </div>
+      <div style={{ fontSize: 13, lineHeight: 1.65, color: "var(--text-secondary)" }}>{content}</div>
+    </div>
   );
 }
