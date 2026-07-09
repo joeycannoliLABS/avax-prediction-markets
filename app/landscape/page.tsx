@@ -1,17 +1,16 @@
 "use client";
 
-import { SectionLabel, Card } from "@/components/UI";
+import { SectionLabel } from "@/components/UI";
 
 interface Platform {
   rank: number;
   name: string;
-  volume: string;
-  volumeNote: string;
+  monthlyVolume: string;
   chain: string;
   chainColor: string;
   type: string;
   website: string;
-  category: string;
+  category: "On-Chain" | "Regulated" | "TradFi";
   note: string;
 }
 
@@ -19,266 +18,244 @@ const platforms: Platform[] = [
   {
     rank: 1,
     name: "Kalshi",
-    volume: "$31.5B",
-    volumeNote: "June 2026",
+    monthlyVolume: "$31.5B",
     chain: "Off-chain (CFTC-regulated)",
     chainColor: "#78909C",
     type: "Centralized Exchange",
     website: "https://kalshi.com",
     category: "Regulated",
-    note: "Dominant by volume. $22B valuation. 87% jump in June from World Cup. $832M on World Cup winner market alone. Robinhood routes through Kalshi infrastructure.",
+    note: "Dominant by volume. $22B valuation. 87% jump in June from World Cup. $832M on World Cup winner market alone.",
   },
   {
     rank: 2,
     name: "Polymarket (International)",
-    volume: "$10.26B",
-    volumeNote: "June 2026",
+    monthlyVolume: "$10.26B",
     chain: "Polygon",
     chainColor: "#7B3FE4",
     type: "Hybrid CLOB (on-chain settlement)",
     website: "https://polymarket.com",
     category: "On-Chain",
-    note: "Largest on-chain PM globally. Record June volume reversed April-May decline. VP Eng has said traction 'massively outpaced' Polygon infrastructure. World Cup winner market at $3.4B+ cumulative.",
+    note: "Largest on-chain PM globally. Record June volume. World Cup winner market at $3.4B+ cumulative. VP Eng: traction 'massively outpaced' Polygon.",
   },
   {
     rank: 3,
     name: "Polymarket US",
-    volume: "$3.04B",
-    volumeNote: "June 2026",
+    monthlyVolume: "$3.04B",
     chain: "Polygon (CFTC-regulated)",
     chainColor: "#7B3FE4",
     type: "Regulated CLOB",
     website: "https://polymarket.com",
     category: "Regulated",
-    note: "Separate CFTC-regulated US entity (QCX LLC). Sports-only for now. Steady upward trend since launch. 0.10% flat taker fee.",
+    note: "CFTC-regulated US entity (QCX LLC). Sports-only for now. 0.10% flat taker fee. Steady upward trend since launch.",
   },
   {
     rank: 4,
     name: "Rothera",
-    volume: "$2B+",
-    volumeNote: "June 2026 (launch month)",
+    monthlyVolume: "$2B+",
     chain: "Off-chain (CFTC-regulated)",
     chainColor: "#78909C",
     type: "Centralized Exchange",
     website: "https://rothera.com",
     category: "Regulated",
-    note: "Joint venture between Susquehanna (SIG) and Robinhood. Launched June 2026. Already 7% US market share per Bank of America. Robinhood routes certain World Cup contracts here.",
+    note: "Susquehanna (SIG) + Robinhood JV. Launched June 2026. Already 7% US market share per Bank of America.",
   },
   {
     rank: 5,
     name: "Limitless",
-    volume: "$1.6B+",
-    volumeNote: "Monthly (Apr 2026)",
+    monthlyVolume: "$1.6B+",
     chain: "Base",
     chainColor: "#0052FF",
     type: "Native CLOB",
     website: "https://limitless.exchange",
     category: "On-Chain",
-    note: "Ava Labs #1 target. Fastest-growing PM by run rate. Pioneered 15/30/60-min markets. DCM filing, Nasdaq listing planned. $3.5B+ total volume.",
+    note: "Ava Labs #1 target. Pioneered 15/30/60-min markets. DCM filing, Nasdaq listing planned. $3.5B+ total volume.",
   },
   {
     rank: 6,
+    name: "Predict.fun",
+    monthlyVolume: "$614M",
+    chain: "BSC, Blast",
+    chainColor: "#F0B90B",
+    type: "Native (yield-optimized)",
+    website: "https://predict.fun",
+    category: "On-Chain",
+    note: "Official Binance prediction provider. $5B+ cumulative. Idle capital earns yield. Backed by YZi Labs + Susquehanna. Acquired Probable.",
+  },
+  {
+    rank: 7,
     name: "Robinhood Predictions",
-    volume: "Wrapper",
-    volumeNote: "Routes via Kalshi/Rothera",
-    chain: "Off-chain (wrapper)",
+    monthlyVolume: "Wrapper",
+    chain: "Off-chain (via Kalshi/Rothera)",
     chainColor: "#78909C",
     type: "Distribution Wrapper",
     website: "https://robinhood.com",
     category: "TradFi",
-    note: ">50% of Kalshi volume. 'Fastest growing business in the company's history.' Now routing some contracts to Rothera (SIG JV). Massive retail distribution.",
+    note: ">50% of Kalshi volume. 'Fastest growing business in the company's history.' Now routing some contracts to Rothera.",
   },
   {
-    rank: 7,
+    rank: 8,
     name: "DraftKings Predictions",
-    volume: "Growing",
-    volumeNote: "Launched late 2025",
-    chain: "Off-chain (CFTC-regulated)",
+    monthlyVolume: "Not disclosed",
+    chain: "Off-chain (CFTC via Railbird)",
     chainColor: "#78909C",
     type: "Centralized Exchange",
     website: "https://draftkings.com",
     category: "TradFi",
-    note: "Acquired Railbird Technologies (CFTC-registered). Expanding nationwide. Blending sportsbook and prediction market in one app.",
+    note: "Acquired Railbird Technologies (CFTC-registered). Expanding nationwide. Blending sportsbook and prediction market.",
   },
   {
-    rank: 8,
+    rank: 9,
     name: "FanDuel Predicts",
-    volume: "Growing",
-    volumeNote: "Launched Jan 2026",
-    chain: "Off-chain (CME Group partnership)",
+    monthlyVolume: "Not disclosed",
+    chain: "Off-chain (CME Group JV)",
     chainColor: "#78909C",
     type: "Centralized Exchange",
     website: "https://fanduel.com",
     category: "TradFi",
-    note: "FanDuel + CME Group partnership. Live in all 50 states (sports contracts in 18). Massive existing sportsbook user base for cross-sell.",
+    note: "FanDuel + CME Group. Live in all 50 states (sports contracts in 18). Massive existing user base for cross-sell.",
   },
   {
-    rank: 9,
+    rank: 10,
     name: "OG (Crypto.com)",
-    volume: "Growing",
-    volumeNote: "Launched Feb 2026",
-    chain: "Off-chain (CFTC-regulated)",
+    monthlyVolume: "Not disclosed",
+    chain: "Off-chain (CFTC via CDNA)",
     chainColor: "#78909C",
     type: "Centralized Exchange",
     website: "https://og.xyz",
     category: "TradFi",
-    note: "Powered by Crypto.com Derivatives North America (CDNA). Social features: leaderboards, posts, comments. Parlays across markets. Just launched in New York.",
+    note: "Launched Feb 2026. Social features: leaderboards, posts, comments. Parlays across markets. Just launched in New York.",
   },
   {
-    rank: 10,
+    rank: 11,
     name: "Fanatics Markets",
-    volume: "Growing",
-    volumeNote: "Launched Dec 2025",
+    monthlyVolume: "Not disclosed",
     chain: "Off-chain",
     chainColor: "#78909C",
     type: "Centralized Exchange",
     website: "https://fanaticsmarkets.com",
     category: "TradFi",
-    note: "Pricing by Crypto.com. Co-branded World Cup hub with ADI Predictstreet in 23 US states. Trade match incentives up to $75.",
+    note: "Pricing by Crypto.com. Co-branded World Cup hub with ADI Predictstreet in 23 US states.",
   },
   {
-    rank: 11,
+    rank: 12,
     name: "ADI Predictstreet",
-    volume: "New",
-    volumeNote: "Launched Jun 2026",
+    monthlyVolume: "Not disclosed",
     chain: "ADI Chain",
     chainColor: "#FFD700",
     type: "Native (Chainlink oracles)",
     website: "https://adipredictstreet.com",
     category: "On-Chain",
-    note: "Official FIFA World Cup 2026 prediction market partner. Licensed in Gibraltar. DAZN partnership for embedded predictions in live streaming. Chainlink Runtime Environment.",
-  },
-  {
-    rank: 12,
-    name: "Predict.fun",
-    volume: "$60.3M",
-    volumeNote: "Weekly (Mar 2026)",
-    chain: "Blast",
-    chainColor: "#FCFC03",
-    type: "Native (yield-optimized)",
-    website: "https://predict.fun",
-    category: "On-Chain",
-    note: "DeFi-native with yield on idle capital while waiting for resolution. Binance integration in development. Capital-efficient model addresses Polymarket's biggest weakness.",
+    note: "Official FIFA World Cup 2026 partner. Licensed in Gibraltar. DAZN partnership. Chainlink Runtime Environment.",
   },
   {
     rank: 13,
     name: "SX Bet",
-    volume: "Growing",
-    volumeNote: "Own app-chain",
+    monthlyVolume: "~$100M est.",
     chain: "SX Chain (Arbitrum Orbit)",
     chainColor: "#28A0F0",
     type: "Native Order Book",
     website: "https://sx.bet",
     category: "On-Chain",
-    note: "0.5% vig vs. industry 5-7%. Own app-chain shows technical maturity. Cross-chain rollout planned. Arbitrum ecosystem under pressure ($131M net outflows).",
+    note: "$1.2B cumulative. 0% fee on singles, 5% on parlay profit. Own app-chain. 40+ sports leagues. Non-custodial.",
   },
   {
     rank: 14,
-    name: "Overtime Markets",
-    volume: "$27M+",
-    volumeNote: "Cumulative wagered",
-    chain: "Multi-chain (OP, Arb, Base +3)",
-    chainColor: "#FF0420",
-    type: "Native AMM",
-    website: "https://overtimemarkets.xyz",
-    category: "On-Chain",
-    note: "Decentralized sportsbook. LP-as-house model (106% returns on Arbitrum LP). 18K+ users. Chainlink feeds. Fragmented across 6+ chains.",
-  },
-  {
-    rank: 15,
-    name: "Azuro Protocol",
-    volume: "Multi-dApp",
-    volumeNote: "Protocol layer",
-    chain: "Polygon, Gnosis, Linea",
-    chainColor: "#7B3FE4",
-    type: "Infrastructure (Liquidity tree)",
-    website: "https://azuro.org",
-    category: "On-Chain",
-    note: "Not a frontend — protocol layer powering multiple sports betting dApps. AZUR token live. One integration = multiple frontends. Force multiplier.",
-  },
-  {
-    rank: 16,
-    name: "Hedgehog Markets",
-    volume: "Growing",
-    volumeNote: "On Solana",
-    chain: "Solana",
-    chainColor: "#14F195",
-    type: "Native AMM + P2P",
-    website: "https://hedgehog.markets",
-    category: "On-Chain",
-    note: "Pooled liquidity, fully on-chain. Building own optimistic oracle. Permissionless market creation.",
-  },
-  {
-    rank: 17,
-    name: "Drift Predict",
-    volume: "Growing",
-    volumeNote: "On Solana",
-    chain: "Solana",
-    chainColor: "#14F195",
-    type: "Native (Perps-style)",
-    website: "https://drift.trade/predict",
-    category: "On-Chain",
-    note: "Built on Drift's derivatives stack. Hybrid prediction + perps. Near-instant settlement. PM as a feature on a derivatives platform.",
-  },
-  {
-    rank: 18,
-    name: "PRDT Finance",
-    volume: "$200M+",
-    volumeNote: "Paid out since 2021",
-    chain: "Multi-chain (incl. Avalanche)",
-    chainColor: "#E53935",
-    type: "Native (Cross-chain binary)",
-    website: "https://prdt.finance",
-    category: "On-Chain",
-    note: "Already on Avalanche. 5-30 min crypto price rounds. 80% of revenue to PRDT stakers daily. One of the longest-running DeFi prediction platforms.",
-  },
-  {
-    rank: 19,
     name: "XO Market",
-    volume: "$150M+",
-    volumeNote: "Since Nov 2025 beta",
+    monthlyVolume: "~$30M est.",
     chain: "Undisclosed (EVM)",
     chainColor: "#90A4AE",
     type: "Native AMM (Bonding Curve)",
     website: "https://xo.market",
     category: "On-Chain",
-    note: "Ava Labs active pursuit. 'YouTube of PMs' — permissionless user-generated. 30K+ users, 600+ markets. $6M seed from 20VC, Coinbase Ventures. XO Vaults coming.",
+    note: "Ava Labs active pursuit. 'YouTube of PMs.' 30K+ users, 600+ markets. $6M seed (20VC, Coinbase Ventures). XO Vaults coming.",
+  },
+  {
+    rank: 15,
+    name: "Overtime Markets",
+    monthlyVolume: "~$5M est.",
+    chain: "Multi-chain (OP, Arb, Base +3)",
+    chainColor: "#FF0420",
+    type: "Native AMM",
+    website: "https://overtimemarkets.xyz",
+    category: "On-Chain",
+    note: "Decentralized sportsbook. LP-as-house (106% return on Arb LP). 18K+ users. Fragmented across 6+ chains.",
+  },
+  {
+    rank: 16,
+    name: "Azuro Protocol",
+    monthlyVolume: "Protocol layer",
+    chain: "Polygon, Gnosis, Linea",
+    chainColor: "#7B3FE4",
+    type: "Infrastructure (Liquidity tree)",
+    website: "https://azuro.org",
+    category: "On-Chain",
+    note: "Not a frontend — powers multiple sports dApps. AZUR token. One integration = multiple frontends.",
+  },
+  {
+    rank: 17,
+    name: "Hedgehog Markets",
+    monthlyVolume: "~$2M est.",
+    chain: "Solana",
+    chainColor: "#14F195",
+    type: "Native AMM + P2P",
+    website: "https://hedgehog.markets",
+    category: "On-Chain",
+    note: "Fully on-chain. Building own optimistic oracle. Permissionless market creation.",
+  },
+  {
+    rank: 18,
+    name: "Drift Predict",
+    monthlyVolume: "~$5M est.",
+    chain: "Solana",
+    chainColor: "#14F195",
+    type: "Native (Perps-style)",
+    website: "https://drift.trade/predict",
+    category: "On-Chain",
+    note: "Built on Drift derivatives stack. Hybrid prediction + perps. PM as feature on derivatives platform.",
+  },
+  {
+    rank: 19,
+    name: "PRDT Finance",
+    monthlyVolume: "~$10M est.",
+    chain: "Multi-chain (incl. Avalanche)",
+    chainColor: "#E53935",
+    type: "Native (Cross-chain binary)",
+    website: "https://prdt.finance",
+    category: "On-Chain",
+    note: "Already on Avalanche. 5-30 min rounds. 80% revenue to stakers. $200M+ paid out since 2021.",
   },
   {
     rank: 20,
     name: "ProphetX",
-    volume: "Growing",
-    volumeNote: "Sports-only",
-    chain: "Off-chain (CFTC-regulated)",
+    monthlyVolume: "Not disclosed",
+    chain: "Off-chain (NJ-licensed)",
     chainColor: "#78909C",
     type: "Centralized Exchange",
     website: "https://prophetx.com",
     category: "Regulated",
-    note: "Sports-only prediction market. Clean interface. $20 bonus for new users. Growing but smaller than Kalshi/Polymarket.",
+    note: "Sports-only. Licensed in NJ, expanding. Sharp NBA/NFL/MLB pricing. No bet limiting.",
   },
   {
     rank: 21,
     name: "Novig",
-    volume: "Growing",
-    volumeNote: "Sports-only",
+    monthlyVolume: "Not disclosed",
     chain: "Off-chain (CFTC-regulated)",
     chainColor: "#78909C",
     type: "Centralized Exchange",
     website: "https://novig.com",
     category: "Regulated",
-    note: "Sports-focused prediction market. No unrelated markets to navigate. Clean, focused product for sports traders.",
+    note: "Sports-focused. Clean, focused product for sports traders. No unrelated markets.",
   },
   {
     rank: 22,
     name: "Gemini Predictions",
-    volume: "New",
-    volumeNote: "Recently launched",
+    monthlyVolume: "Not disclosed",
     chain: "Off-chain",
     chainColor: "#78909C",
     type: "Peer-to-peer",
     website: "https://gemini.com",
     category: "TradFi",
-    note: "Peer-to-peer prediction platform. Sports-focused. Beginner-friendly. Backed by Gemini's crypto exchange infrastructure.",
+    note: "Sports-focused. Beginner-friendly. Backed by Gemini exchange infrastructure.",
   },
 ];
 
@@ -287,6 +264,10 @@ const categoryColors: Record<string, string> = {
   "Regulated": "#42A5F5",
   "TradFi": "#FB8C00",
 };
+
+const onChainCount = platforms.filter((p: Platform) => p.category === "On-Chain").length;
+const regulatedCount = platforms.filter((p: Platform) => p.category === "Regulated").length;
+const tradFiCount = platforms.filter((p: Platform) => p.category === "TradFi").length;
 
 export default function LandscapePage() {
   return (
@@ -308,22 +289,40 @@ export default function LandscapePage() {
         </p>
       </div>
 
-      {/* Summary stats */}
+      {/* Top stats */}
       <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12, marginBottom: 36 }}>
-        {[
-          { label: "Combined June volume", value: "$44.8B" },
-          { label: "Kalshi June volume", value: "$31.5B" },
-          { label: "Polymarket June volume", value: "$10.26B" },
-          { label: "Platforms tracked", value: String(platforms.length) },
-        ].map((s) => (
-          <div key={s.label} style={{
-            background: "var(--bg-card)", border: "1px solid var(--border)",
-            borderRadius: 8, padding: "16px 18px",
-          }}>
-            <div style={{ fontSize: 11, color: "var(--text-tertiary)", letterSpacing: 0.3, marginBottom: 6 }}>{s.label}</div>
-            <div style={{ fontSize: 22, fontWeight: 600, color: "var(--text-primary)" }}>{s.value}</div>
+        <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 8, padding: "16px 18px" }}>
+          <div style={{ fontSize: 11, color: "var(--text-tertiary)", letterSpacing: 0.3, marginBottom: 6 }}>Est. lifetime volume (all platforms)</div>
+          <div style={{ fontSize: 22, fontWeight: 600, color: "var(--text-primary)" }}>$200B+</div>
+        </div>
+        <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 8, padding: "16px 18px" }}>
+          <div style={{ fontSize: 11, color: "var(--text-tertiary)", letterSpacing: 0.3, marginBottom: 6 }}>Combined monthly (Jun 2026)</div>
+          <div style={{ fontSize: 22, fontWeight: 600, color: "var(--text-primary)" }}>$50B+</div>
+        </div>
+        <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 8, padding: "16px 18px" }}>
+          <div style={{ fontSize: 11, color: "var(--text-tertiary)", letterSpacing: 0.3, marginBottom: 6 }}>Platforms tracked</div>
+          <div style={{ fontSize: 22, fontWeight: 600, color: "var(--text-primary)" }}>{platforms.length}</div>
+        </div>
+        <div style={{ background: "var(--bg-card)", border: "1px solid var(--border)", borderRadius: 8, padding: "16px 18px" }}>
+          <div style={{ fontSize: 11, color: "var(--text-tertiary)", letterSpacing: 0.3, marginBottom: 6 }}>By category</div>
+          <div style={{ display: "flex", gap: 12, marginTop: 4 }}>
+            <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#00E676", display: "inline-block" }} />
+              <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>{onChainCount}</span>
+              <span style={{ fontSize: 10, color: "var(--text-tertiary)" }}>On-Chain</span>
+            </span>
+            <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#42A5F5", display: "inline-block" }} />
+              <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>{regulatedCount}</span>
+              <span style={{ fontSize: 10, color: "var(--text-tertiary)" }}>Reg</span>
+            </span>
+            <span style={{ display: "flex", alignItems: "center", gap: 5 }}>
+              <span style={{ width: 8, height: 8, borderRadius: "50%", background: "#FB8C00", display: "inline-block" }} />
+              <span style={{ fontSize: 14, fontWeight: 600, color: "var(--text-primary)" }}>{tradFiCount}</span>
+              <span style={{ fontSize: 10, color: "var(--text-tertiary)" }}>TradFi</span>
+            </span>
           </div>
-        ))}
+        </div>
       </div>
 
       {/* Legend */}
@@ -338,7 +337,6 @@ export default function LandscapePage() {
 
       <SectionLabel>ALL PLATFORMS BY VOLUME</SectionLabel>
 
-      {/* Platform list */}
       <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
         {platforms.map((p: Platform) => (
           <a
@@ -356,6 +354,10 @@ export default function LandscapePage() {
                 padding: "18px 22px",
                 transition: "border-color 0.15s ease",
                 cursor: "pointer",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+                gap: 16,
               }}
               onMouseOver={(e: React.MouseEvent<HTMLDivElement>) => {
                 e.currentTarget.style.borderColor = "rgba(255,255,255,0.15)";
@@ -364,55 +366,52 @@ export default function LandscapePage() {
                 e.currentTarget.style.borderColor = "rgba(255,255,255,0.06)";
               }}
             >
-              {/* Top row: rank, name, volume, chain */}
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: 8 }}>
-                <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+              {/* Left: rank, name, type, note */}
+              <div style={{ flex: 1, minWidth: 0 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 10, marginBottom: 4 }}>
                   <span style={{
                     fontSize: 14, fontWeight: 700, color: "var(--text-tertiary)",
-                    fontFamily: "monospace", width: 28, textAlign: "right",
+                    fontFamily: "monospace", width: 24, textAlign: "right", flexShrink: 0,
                   }}>
                     {p.rank}
                   </span>
-                  <div>
-                    <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                      <span style={{ fontSize: 17, fontWeight: 600, color: "var(--text-primary)" }}>{p.name}</span>
-                      <span style={{
-                        width: 7, height: 7, borderRadius: "50%",
-                        background: categoryColors[p.category] || "#78909C",
-                        display: "inline-block",
-                      }} />
-                      <span style={{ fontSize: 11, color: "var(--text-tertiary)" }}>↗</span>
-                    </div>
-                    <span style={{ fontSize: 12, color: "var(--text-tertiary)" }}>{p.type}</span>
-                  </div>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-                  <div style={{ textAlign: "right" }}>
-                    <div style={{ fontSize: 20, fontWeight: 700, color: "var(--text-primary)" }}>{p.volume}</div>
-                    <div style={{ fontSize: 10, color: "var(--text-tertiary)" }}>{p.volumeNote}</div>
-                  </div>
+                  <span style={{ fontSize: 17, fontWeight: 600, color: "var(--text-primary)" }}>{p.name}</span>
                   <span style={{
-                    fontSize: 10, padding: "3px 10px", borderRadius: 4,
-                    background: `${p.chainColor}18`, border: `1px solid ${p.chainColor}33`,
-                    color: p.chainColor, whiteSpace: "nowrap",
-                  }}>
-                    {p.chain}
-                  </span>
+                    width: 7, height: 7, borderRadius: "50%",
+                    background: categoryColors[p.category],
+                    display: "inline-block", flexShrink: 0,
+                  }} />
+                  <span style={{ fontSize: 11, color: "var(--text-tertiary)" }}>↗</span>
+                </div>
+                <div style={{ paddingLeft: 34, marginBottom: 6 }}>
+                  <span style={{ fontSize: 12, color: "var(--text-tertiary)" }}>{p.type}</span>
+                </div>
+                <div style={{ paddingLeft: 34 }}>
+                  <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, lineHeight: 1.5 }}>
+                    {p.note}
+                  </p>
                 </div>
               </div>
 
-              {/* Note */}
-              <div style={{ marginTop: 10, paddingLeft: 42 }}>
-                <p style={{ fontSize: 13, color: "var(--text-secondary)", margin: 0, lineHeight: 1.5 }}>
-                  {p.note}
-                </p>
+              {/* Right: volume + chain tag */}
+              <div style={{ textAlign: "right", flexShrink: 0, minWidth: 140 }}>
+                <div style={{ fontSize: 20, fontWeight: 700, color: "var(--text-primary)", marginBottom: 6 }}>
+                  {p.monthlyVolume}
+                </div>
+                <span style={{
+                  fontSize: 10, padding: "3px 10px", borderRadius: 4,
+                  background: p.chainColor + "18", border: "1px solid " + p.chainColor + "33",
+                  color: p.chainColor, whiteSpace: "nowrap", display: "inline-block",
+                }}>
+                  {p.chain}
+                </span>
               </div>
             </div>
           </a>
         ))}
       </div>
 
-      {/* Bottom context card */}
+      {/* Bottom context */}
       <div style={{
         marginTop: 32, padding: "20px 22px",
         background: "rgba(229,57,53,0.06)", border: "1px solid rgba(229,57,53,0.15)",
@@ -423,21 +422,22 @@ export default function LandscapePage() {
         </div>
         <div style={{ fontSize: 13, lineHeight: 1.7, color: "var(--text-secondary)" }}>
           <strong style={{ color: "var(--text-primary)" }}>The World Cup effect:</strong> June 2026 was the biggest month
-          in prediction market history. Combined Kalshi + Polymarket volume hit $44.8B, up 75% from May. Kalshi maintained
-          daily volume above $1B throughout the tournament. Prediction market apps captured 78.5% of betting app downloads
-          in June, up from 6% a year earlier.
+          in prediction market history. Combined Kalshi + Polymarket volume hit $44.8B, up 75% from May. Prediction market
+          apps captured 78.5% of betting app downloads, up from 6% a year earlier. Traditional sportsbooks lost users during
+          the World Cup while prediction markets gained them.
           <br /><br />
-          <strong style={{ color: "var(--text-primary)" }}>The TradFi invasion is real:</strong> DraftKings, FanDuel, Fanatics,
-          OG (Crypto.com), Gemini, and Rothera (Robinhood/SIG) all launched prediction products in the last 8 months. The
-          category is validated — the fight is now over distribution and chain economics.
+          <strong style={{ color: "var(--text-primary)" }}>The TradFi invasion:</strong> 13+ federally regulated platforms
+          are now live in the US. DraftKings, FanDuel, Fanatics, OG (Crypto.com), Gemini, and Rothera (Robinhood/SIG) all
+          launched in the last 8 months. The pitch to every on-chain target: &quot;Your edge is being on-chain, permissionless,
+          and composable. Avalanche makes that edge as sharp as possible.&quot;
           <br /><br />
-          <strong style={{ color: "var(--text-primary)" }}>On-chain vs. off-chain:</strong> Most volume is off-chain (Kalshi, Robinhood,
-          DraftKings, FanDuel). Polymarket is the dominant on-chain player. The on-chain opportunity is in the platforms that need
-          dedicated infrastructure, composability, and permissionless innovation — that is where Avalanche competes.
+          <strong style={{ color: "var(--text-primary)" }}>On-chain vs. off-chain:</strong> Most volume is off-chain (Kalshi,
+          Robinhood, DraftKings, FanDuel). Polymarket dominates on-chain. The opportunity for Avalanche is in platforms that
+          need dedicated infrastructure, composability, and permissionless innovation.
           <br /><br />
-          <strong style={{ color: "var(--text-primary)" }}>Where Avalanche fits:</strong> PRDT Finance is already deployed on Avalanche.
-          Limitless and XO Market are active pursuits. The ecosystem has 7 PM products live or building. No other chain has that
-          density of dedicated prediction market products.
+          <strong style={{ color: "var(--text-primary)" }}>Where Avalanche fits:</strong> PRDT Finance is already deployed.
+          Limitless and XO Market are active pursuits. The ecosystem has 7 PM products live or building. No other chain has
+          that density of dedicated prediction market products.
         </div>
       </div>
     </>
