@@ -174,15 +174,27 @@ export default function TargetsPage() {
           other partner on the board.
           <br />
           <br />
-          <strong style={{ color: "var(--text-primary)" }}>The new high-upside play:</strong> Premu. Just launched with permissionless
-          market creation + 2.5x leverage on Ethereum/Arbitrum/Base. Combines XO&apos;s user-generated model with Verdict&apos;s
-          leverage thesis. No ecosystem lock-in, World Cup timing, EVM-native. Move before they settle into Arbitrum.
+          <strong style={{ color: "var(--text-primary)" }}>The new high-upside play:</strong> XO Market is now in active pursuit.
+          User-generated prediction markets are the next evolution of the category — Polymarket curates, XO democratizes.
+          They&apos;re chain-flexible, their model benefits from Avalanche&apos;s ecosystem density, and XO Vaults could become
+          a DeFi primitive on C-Chain. This is the #2 target behind Limitless.
           <br />
           <br />
           <strong style={{ color: "var(--text-primary)" }}>The hidden asset:</strong> PRDT Finance is already deployed on
           Avalanche but has no ecosystem relationship. $200M+ paid out since 2021, 80% revenue share to stakers. This
           isn&apos;t a migration — it&apos;s a deepening. Co-funded liquidity and featured placement could make Avalanche
           their primary chain.
+          <br />
+          <br />
+          <strong style={{ color: "var(--text-primary)" }}>The lesson learned:</strong> Premu launched with a compelling pitch
+          (permissionless + leverage) and rugged everyone. Reinforces the importance of due diligence on team, smart contract
+          audits, and treasury transparency before any ecosystem commitment. Early-stage targets need deeper vetting.
+          <br />
+          <br />
+          <strong style={{ color: "var(--text-primary)" }}>The yield play:</strong> Predict.fun ($614M monthly, $5B+ cumulative)
+          solved the capital efficiency problem — idle prediction capital earns yield. Their model would thrive on Avalanche&apos;s
+          DeFi stack (Benqi, Aave) but they&apos;re deeply embedded in BNB as Binance&apos;s official prediction provider.
+          Long shot, but the yield-composability angle is genuine.
           <br />
           <br />
           <strong style={{ color: "var(--text-primary)" }}>The ecosystem multiplier:</strong> Azuro. One win here means
@@ -197,7 +209,7 @@ export default function TargetsPage() {
           <br />
           <br />
           <strong style={{ color: "var(--text-primary)" }}>The timing catalyst:</strong> World Cup 2026 is live NOW.
-          Every sports-facing target (Overtime, Azuro, SX Bet, Premu, ADI Predictstreet) has a volume spike happening.
+          Every sports-facing target (Overtime, Azuro, SX Bet, ADI Predictstreet) has a volume spike happening.
           Post-tournament is the window for expansion conversations.
         </div>
       </div>
