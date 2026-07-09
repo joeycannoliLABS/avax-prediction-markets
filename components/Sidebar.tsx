@@ -49,8 +49,12 @@ const sections: NavSection[] = [
           },
         ],
       },
-      { name: "L1 vs C-Chain Pitch", icon: "⬡", href: "/l1-pitch" },
-      { name: "Ownership Playbook", icon: "▣", href: "/ownership" },
+      {
+        name: "Pitch Template",
+        icon: "⬡",
+        href: "https://docs.google.com/document/d/1jK7dprcO0_9LvGE8hPk2mjwXFY2b6iUM7qnuWURqubo/edit?tab=t.0#heading=h.56fe76hor6gi",
+        external: true,
+      },
     ],
   },
   {
