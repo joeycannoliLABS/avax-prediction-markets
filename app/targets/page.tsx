@@ -197,6 +197,25 @@ export default function TargetsPage() {
           Long shot, but the yield-composability angle is genuine.
           <br />
           <br />
+          <strong style={{ color: "var(--text-primary)" }}>The cleanest L1 fit on the board:</strong> Pascal. Off-chain matching,
+          on-chain settlement, institutional execution quality as the entire value proposition — on Solana. Founded by the former
+          dYdX CEO, who already built a dedicated chain once for exactly this reason. $15M raised, USV-led, still in private beta.
+          Every argument in our L1 deck is an argument they are already making to their own users. This is the highest-conviction
+          new target since Limitless.
+          <br />
+          <br />
+          <strong style={{ color: "var(--text-primary)" }}>The re-winnable migration:</strong> Forkast migrated to Arbitrum
+          explicitly for ~250ms block speed. Avalanche L1s target ~100ms. They have already proven they will move chains on
+          performance grounds, Arbitrum is bleeding liquidity, and we have m3lee, The Arena, and Predictfully as creator-prediction
+          ecosystem adjacency no other chain can match. Resolve the m3lee overlap internally first.
+          <br />
+          <br />
+          <strong style={{ color: "var(--text-primary)" }}>The diligence gate:</strong> Predixa is in the tracker as a deliberate
+          test case, not a target. Time-boxed pre-launch raise, paid press release, single-token ecosystem wrapper, founder named
+          by first name only. That is the Premu profile. Verified team, third-party audit, on-chain treasury, and independent volume
+          before any conversation — no exceptions.
+          <br />
+          <br />
           <strong style={{ color: "var(--text-primary)" }}>The ecosystem multiplier:</strong> Azuro. One win here means
           multiple sports frontends, not one. This is how you win a vertical without signing ten individual deals.
           <br />
