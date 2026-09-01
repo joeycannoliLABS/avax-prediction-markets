@@ -435,6 +435,20 @@ export default function LandscapePage() {
           Robinhood, DraftKings, FanDuel). Polymarket dominates on-chain. The opportunity for Avalanche is in platforms that
           need dedicated infrastructure, composability, and permissionless innovation.
           <br /><br />
+          <strong style={{ color: "var(--text-primary)" }}>The regulatory split (new, Aug 2026):</strong> The category is
+          bifurcating into two tracks. Track one is CFTC-regulated event contracts (Kalshi, Polymarket, Crypto.com) — currently
+          fighting state gambling-law preemption. Track two routes around the CFTC entirely: SEC-registered national securities
+          exchanges listing prediction contracts as options on securities indices, cleared by OCC. Cboe launched a Mini-SPX
+          prediction contract in June 2026, MEMX filed for binary options in August, and Nasdaq has signalled it will likely
+          pursue the securities path. If track two scales, a large slice of the category becomes securities-market infrastructure
+          rather than crypto infrastructure — which changes who on-chain platforms are competing against, and makes composability
+          and permissionlessness the only durable differentiators.
+          <br /><br />
+          <strong style={{ color: "var(--text-primary)" }}>The aggregation layer is forming:</strong> River Markets raised $8.5M
+          (Haun Ventures, Y Combinator, Coinbase Ventures, Qube Research) to give institutions one interface across fragmented
+          prediction venues. Aggregation is a category Avalanche has no presence in. Worth deciding whether that is a gap to fill
+          or a layer to stay out of.
+          <br /><br />
           <strong style={{ color: "var(--text-primary)" }}>Where Avalanche fits:</strong> PRDT Finance is already deployed.
           Limitless and XO Market are active pursuits. The ecosystem has 7 PM products live or building. No other chain has
           that density of dedicated prediction market products.
